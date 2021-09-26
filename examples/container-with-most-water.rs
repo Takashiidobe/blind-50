@@ -17,9 +17,6 @@ tests! {
 }
 
 pub fn max_area(height: Vec<i32>) -> i32 {
-    if height.len() == 2 {
-        return i32::min(height[0], height[1]);
-    }
     let mut i = 0;
     let mut j = height.len() - 1;
 
