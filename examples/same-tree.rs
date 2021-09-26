@@ -1,23 +1,7 @@
+use blind_50::btree;
+use blind_50::TreeNode;
 use std::cell::RefCell;
 use std::rc::Rc;
-
-#[derive(Clone)]
-pub struct TreeNode {
-    pub val: i32,
-    pub left: Option<Rc<RefCell<TreeNode>>>,
-    pub right: Option<Rc<RefCell<TreeNode>>>,
-}
-
-impl TreeNode {
-    #[inline]
-    pub fn new(val: i32) -> Self {
-        TreeNode {
-            val,
-            left: None,
-            right: None,
-        }
-    }
-}
 
 macro_rules! tests {
     ($($name:ident: $value:expr,)*) => {
@@ -32,8 +16,8 @@ macro_rules! tests {
 }
 
 tests! {
-    example_1: (Some(Rc::new(RefCell::new(TreeNode { val: 1, left: None, right: None }))), Some(Rc::new(RefCell::new(TreeNode { val: 1, left: None, right: None }))), true),
-    example_2: (Some(Rc::new(RefCell::new(TreeNode { val: 2, left: None, right: None }))), Some(Rc::new(RefCell::new(TreeNode { val: 1, left: None, right: None }))), false),
+    ex1: (btree![1, 2, 3], btree![1,2,3], true),
+    ex2: (btree![1, 2, 3, 4], btree![1,2,3], false),
 }
 
 pub fn is_same_tree(p: Option<Rc<RefCell<TreeNode>>>, q: Option<Rc<RefCell<TreeNode>>>) -> bool {
@@ -51,26 +35,6 @@ pub fn is_same_tree(p: Option<Rc<RefCell<TreeNode>>>, q: Option<Rc<RefCell<TreeN
 }
 
 fn main() {
-    let first_left = TreeNode {
-        val: 2,
-        left: None,
-        right: None,
-    };
-    let first_right = TreeNode {
-        val: 3,
-        left: None,
-        right: None,
-    };
-    let first = TreeNode {
-        val: 1,
-        left: Some(Rc::new(RefCell::new(first_left))),
-        right: Some(Rc::new(RefCell::new(first_right))),
-    };
-    println!(
-        "{:?}",
-        is_same_tree(
-            Some(Rc::new(RefCell::new(first.clone()))),
-            Some(Rc::new(RefCell::new(first.clone())))
-        )
-    );
+    println!("{:?}", is_same_tree(btree![1, 2, 3], btree![1, 2, 3]));
+    println!("{:?}", is_same_tree(btree![1, 2, 3, 4], btree![1, 2, 3]));
 }
