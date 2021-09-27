@@ -1,23 +1,7 @@
+use blind_50::btree;
+use blind_50::TreeNode;
 use std::cell::RefCell;
 use std::rc::Rc;
-
-#[derive(Clone)]
-pub struct TreeNode {
-    pub val: i32,
-    pub left: Option<Rc<RefCell<TreeNode>>>,
-    pub right: Option<Rc<RefCell<TreeNode>>>,
-}
-
-impl TreeNode {
-    #[inline]
-    pub fn new(val: i32) -> Self {
-        TreeNode {
-            val,
-            left: None,
-            right: None,
-        }
-    }
-}
 
 macro_rules! tests {
     ($($name:ident: $value:expr,)*) => {
@@ -32,7 +16,8 @@ macro_rules! tests {
 }
 
 tests! {
-    example_0: (None, 0),
+    ex1: (btree![], 0),
+    ex2: (btree![3,9,20,null,null,15,7], 3),
 }
 
 pub fn max_depth(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
@@ -49,5 +34,6 @@ pub fn max_depth(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
 }
 
 fn main() {
-    println!("{}", max_depth(None));
+    println!("{}", max_depth(btree![]));
+    println!("{}", max_depth(btree![1, 2, 3, 4, 5]));
 }

@@ -15,12 +15,13 @@ macro_rules! tests {
 tests! {
     ex1: (vec![1,2,3,1], true),
     ex2: (vec![1,2,4,3], false),
-    ex2: (vec![1], false),
+    ex3: (vec![1], false),
 }
 
 pub fn contains_duplicate(nums: Vec<i32>) -> bool {
-    let s: HashSet<i32> = nums.iter().cloned().collect();
-    s.len() != nums.len()
+    let num_len = nums.len();
+    let s: HashSet<i32> = nums.into_iter().collect();
+    s.len() != num_len
 }
 
 fn main() {
