@@ -1,12 +1,14 @@
-use blind_50::btree;
-use blind_50::TreeNode;
+#[allow(unused_imports)]
+use crate::btree;
+use crate::TreeNode;
 use std::cell::RefCell;
 use std::rc::Rc;
 
 type MaybeNode = Option<Rc<RefCell<TreeNode>>>;
 
-macro_rules! tests {
+macro_rules!  tests {
     ($($name:ident: $value:expr,)*) => {
+    #[cfg(test)]
     $(
         #[test]
         fn $name() {
@@ -33,9 +35,4 @@ pub fn is_subtree(root: MaybeNode, sub_root: MaybeNode) -> bool {
     }
 
     is_equal(&root, &sub_root)
-}
-
-fn main() {
-    println!("{:?}", is_subtree(btree![1, 2, 3], btree![1, 2, 3]));
-    println!("{:?}", is_subtree(btree![1, 2, 3, 4], btree![1, 2, 3]));
 }

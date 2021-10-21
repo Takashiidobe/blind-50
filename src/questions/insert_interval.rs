@@ -2,6 +2,7 @@ use std::cmp::{max, min};
 
 macro_rules! tests {
     ($($name:ident: $value:expr,)*) => {
+    #[cfg(test)]
     $(
         #[test]
         fn $name() {
@@ -14,6 +15,7 @@ macro_rules! tests {
 
 tests! {
     ex1: (vec![vec![1, 3], vec![6, 9]], vec![2, 5], vec![vec![1, 5], vec![6, 9]]),
+    ex2: (vec![vec![1, 2], vec![6, 9]], vec![2, 5], vec![vec![1, 5], vec![6, 9]]),
 }
 
 pub fn insert_interval(intervals: Vec<Vec<i32>>, new_interval: Vec<i32>) -> Vec<Vec<i32>> {
@@ -36,5 +38,3 @@ pub fn insert_interval(intervals: Vec<Vec<i32>>, new_interval: Vec<i32>) -> Vec<
     left.extend(right);
     left
 }
-
-fn main() {}

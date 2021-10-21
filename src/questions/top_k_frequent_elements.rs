@@ -1,5 +1,6 @@
 macro_rules! tests {
     ($($name:ident: $value:expr,)*) => {
+    #[cfg(test)]
     $(
         #[test]
         fn $name() {
@@ -57,10 +58,4 @@ pub fn top_k_frequent_bucket_sort(nums: Vec<i32>, k: i32) -> Vec<i32> {
         .flatten()
         .collect::<Vec<i32>>();
     ans[ans.len() - k as usize..].to_vec()
-}
-
-fn main() {
-    println!("{:?}", top_k_frequent(vec![1, 1, 1, 2, 2, 3], 2));
-    println!("{:?}", top_k_frequent(vec![1], 1));
-    println!("{:?}", top_k_frequent(vec![1, 1, 1, 2, 2, 3], 3));
 }

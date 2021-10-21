@@ -1,26 +1,3 @@
-macro_rules! tests {
-    ($($name:ident: $value:expr,)*) => {
-    $(
-        #[test]
-        fn $name() {
-            let (input, expected) = $value;
-            assert_eq!(expected, num_islands(input));
-        }
-    )*
-    }
-}
-
-tests! {
-    ex1: (
-        vec![
-            vec!['1','1','1','1','0'],
-            vec!['1','1','0','1','0'],
-            vec!['1','1','0','0','0'],
-            vec!['0','0','0','0','0']
-        ],
-    1),
-}
-
 pub fn num_islands(mut grid: Vec<Vec<char>>) -> i32 {
     let mut count = 0;
     fn dfs(grid: &mut Vec<Vec<char>>, i: usize, j: usize) {
@@ -54,4 +31,19 @@ pub fn num_islands(mut grid: Vec<Vec<char>>) -> i32 {
     count
 }
 
-fn main() {}
+#[cfg(test)]
+mod test {
+    use super::*;
+    #[test]
+    fn test_1() {
+        assert_eq!(
+            num_islands(vec![
+                vec!['1', '1', '1', '1', '0'],
+                vec!['1', '1', '0', '1', '0'],
+                vec!['1', '1', '0', '0', '0'],
+                vec!['0', '0', '0', '0', '0']
+            ]),
+            1
+        );
+    }
+}

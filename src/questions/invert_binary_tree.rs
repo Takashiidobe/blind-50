@@ -1,25 +1,9 @@
-use blind_50::btree;
-use blind_50::TreeNode;
+use crate::TreeNode;
 use std::cell::RefCell;
 use std::rc::Rc;
 
-macro_rules! tests {
-    ($($name:ident: $value:expr,)*) => {
-    $(
-        #[test]
-        fn $name() {
-            let (input, expected) = $value;
-            assert_eq!(expected, invert_binary_tree(input));
-        }
-    )*
-    }
-}
-
-tests! {
-   ex1: (btree![4,2,7,1,3,6,9], btree![4,7,2,9,6,3,1]),
-   ex2: (btree![1,2,3,4], btree![1,3,2,null,null,null,4]),
-}
-
+/// Inverts a Binary Tree.
+/// This is done by taking each node's children and swapping them.
 pub fn invert_binary_tree(
     mut root: Option<Rc<RefCell<TreeNode>>>,
 ) -> Option<Rc<RefCell<TreeNode>>> {
@@ -43,6 +27,24 @@ pub fn invert_binary_tree(
     root
 }
 
-fn main() {
-    println!("{:?}", invert_binary_tree(btree![1, 2, 3]));
+#[cfg(test)]
+mod test {
+    use super::*;
+    use crate::btree;
+
+    #[test]
+    fn test_1() {
+        assert_eq!(
+            invert_binary_tree(btree![4, 2, 7, 1, 3, 6, 9]),
+            btree![4, 7, 2, 9, 6, 3, 1]
+        );
+    }
+
+    #[test]
+    fn test_2() {
+        assert_eq!(
+            invert_binary_tree(btree![1, 2, 3, 4]),
+            btree![1, 3, 2, null, null, null, 4]
+        );
+    }
 }

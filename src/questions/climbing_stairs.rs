@@ -1,22 +1,4 @@
-macro_rules! tests {
-    ($($name:ident: $value:expr,)*) => {
-    $(
-        #[test]
-        fn $name() {
-            let (input, expected) = $value;
-            assert_eq!(expected, fib(input));
-        }
-    )*
-    }
-}
-
-tests! {
-    ex1: (1, 1),
-    ex2: (2, 2),
-    ex3: (3, 3),
-}
-
-fn climbing_stairs(n: i32) -> i32 {
+pub fn climbing_stairs(n: i32) -> i32 {
     if n == 1 {
         return 1;
     } else if n == 2 {
@@ -33,7 +15,7 @@ fn climbing_stairs(n: i32) -> i32 {
     prev_prev + prev
 }
 
-fn climbing_stairs_rec(n: i32) -> i32 {
+pub fn climbing_stairs_rec(n: i32) -> i32 {
     let mut v = vec![0, 1, 2];
     fn traverse(n: usize, v: &mut Vec<i32>) {
         v.push(v[n - 1] + v[n - 2]);
@@ -44,7 +26,11 @@ fn climbing_stairs_rec(n: i32) -> i32 {
     v[n as usize]
 }
 
-fn main() {
-    println!("{}", climbing_stairs(10));
-    println!("{}", climbing_stairs_rec(10));
+#[cfg(test)]
+mod test {
+    use super::*;
+    #[test]
+    fn test_1() {
+        assert_eq!(climbing_stairs(1), 1);
+    }
 }

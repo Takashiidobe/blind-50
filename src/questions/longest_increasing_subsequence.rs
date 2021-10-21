@@ -1,5 +1,6 @@
 macro_rules! tests {
     ($($name:ident: $value:expr,)*) => {
+    #[cfg(test)]
     $(
         #[test]
         fn $name() {
@@ -13,7 +14,7 @@ macro_rules! tests {
 tests! {
     ex1: (vec![10,9,2,5,3,7,101,18], 4),
     ex2: (vec![0,1,0,3,2,3], 4),
-    ex3: (vec![7,7,7,7,7,7,7], 4),
+    ex3: (vec![7,7,7,7,7,7,7], 1),
 }
 
 pub fn longest_increasing_subsequence(nums: Vec<i32>) -> i32 {
@@ -30,8 +31,4 @@ pub fn longest_increasing_subsequence(nums: Vec<i32>) -> i32 {
     }
 
     *table.iter().max().unwrap()
-}
-
-fn main() {
-    println!("{:?}", longest_increasing_subsequence(vec![1, 2, 3]));
 }
