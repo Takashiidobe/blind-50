@@ -1,22 +1,9 @@
-use crate::TreeNode;
-use std::cell::RefCell;
+use crate::*;
 use std::cmp::max;
-use std::rc::Rc;
 
-#[cfg(test)]
-mod test {
-    use super::*;
-    use crate::btree;
-
-    #[test]
-    fn test_1() {
-        assert_eq!(max_path_sum(btree![1, 2, 3]), 6);
-    }
-
-    #[test]
-    fn test_2() {
-        assert_eq!(max_path_sum(btree![-10, 9, 20, null, null, 15, 7]), 42);
-    }
+test! {
+    test_1: max_path_sum(btree![1,2,3]), 6,
+    test_2: max_path_sum(btree![-10, 9, 20, null, null, 15, 7]), 42,
 }
 
 /// Finds the maximum path sum through a binary tree.

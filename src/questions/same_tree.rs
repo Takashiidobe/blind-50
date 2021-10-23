@@ -1,6 +1,4 @@
-use crate::TreeNode;
-use std::cell::RefCell;
-use std::rc::Rc;
+use crate::*;
 
 /// Calculates if two binary search trees have the same values.
 /// In this question, there are four possible cases:
@@ -26,23 +24,7 @@ pub fn is_same_tree(p: Option<Rc<RefCell<TreeNode>>>, q: Option<Rc<RefCell<TreeN
     same(&p, &q)
 }
 
-#[cfg(test)]
-mod test {
-    use super::*;
-    use crate::btree;
-
-    #[test]
-    fn test_1() {
-        let left = btree![1, 2, 3];
-        let right = btree![1, 2, 3];
-        assert_eq!(is_same_tree(left, right), true);
-    }
-
-    #[test]
-    fn test_2() {
-        let left = btree![1, 2, 3, 4];
-        let right = btree![1, 2, 3];
-
-        assert_eq!(is_same_tree(left, right), false);
-    }
+test! {
+    test_1: is_same_tree(btree![1,2,3], btree![1,2,3]), true,
+    test_2: is_same_tree(btree![1,2,3,4], btree![1,2,3]), false,
 }

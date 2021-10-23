@@ -23,6 +23,22 @@ impl TreeNode {
 }
 
 #[macro_export]
+macro_rules! test {
+    ($($name:ident: $left:expr, $right:expr,)*) => {
+        #[cfg(test)]
+        mod test {
+        use super::*;
+            $(
+                #[test]
+                fn $name() {
+                    assert_eq!($left, $right);
+                }
+            )*
+        }
+    }
+}
+
+#[macro_export]
 macro_rules! btree {
     () => {
         None

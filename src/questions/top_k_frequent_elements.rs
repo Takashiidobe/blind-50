@@ -1,21 +1,4 @@
-macro_rules! tests {
-    ($($name:ident: $value:expr,)*) => {
-    #[cfg(test)]
-    $(
-        #[test]
-        fn $name() {
-            let (input, k, expected) = $value;
-            assert_eq!(expected, top_k_frequent(input, k));
-        }
-    )*
-    }
-}
-
-tests! {
-    ex1: (vec![1, 1, 1, 2, 2, 3], 2, vec![1, 2]),
-    ex2: (vec![1], 1, vec![1]),
-    ex3: (vec![1,1,1,2,2,3], 3, vec![1,2,3]),
-}
+use crate::*;
 
 use std::collections::BinaryHeap;
 use std::collections::HashMap;
@@ -58,4 +41,10 @@ pub fn top_k_frequent_bucket_sort(nums: Vec<i32>, k: i32) -> Vec<i32> {
         .flatten()
         .collect::<Vec<i32>>();
     ans[ans.len() - k as usize..].to_vec()
+}
+
+test! {
+    test_1: top_k_frequent(vec![1, 1, 1, 2, 2, 3], 2), vec![1, 2],
+    test_2: top_k_frequent(vec![1], 1), vec![1],
+    test_3: top_k_frequent(vec![1,1,1,2,2,3], 3), vec![1,2,3],
 }

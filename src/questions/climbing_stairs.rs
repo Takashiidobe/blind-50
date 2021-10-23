@@ -1,3 +1,5 @@
+use crate::*;
+
 pub fn climbing_stairs(n: i32) -> i32 {
     if n == 1 {
         return 1;
@@ -26,11 +28,6 @@ pub fn climbing_stairs_rec(n: i32) -> i32 {
     v[n as usize]
 }
 
-#[cfg(test)]
-mod test {
-    use super::*;
-    #[test]
-    fn test_1() {
-        assert_eq!(climbing_stairs(1), 1);
-    }
+test! {
+    test_1: climbing_stairs(1), 1,
 }

@@ -1,6 +1,4 @@
-use crate::TreeNode;
-use std::cell::RefCell;
-use std::rc::Rc;
+use crate::*;
 
 /// Inverts a Binary Tree.
 /// This is done by taking each node's children and swapping them.
@@ -27,24 +25,7 @@ pub fn invert_binary_tree(
     root
 }
 
-#[cfg(test)]
-mod test {
-    use super::*;
-    use crate::btree;
-
-    #[test]
-    fn test_1() {
-        assert_eq!(
-            invert_binary_tree(btree![4, 2, 7, 1, 3, 6, 9]),
-            btree![4, 7, 2, 9, 6, 3, 1]
-        );
-    }
-
-    #[test]
-    fn test_2() {
-        assert_eq!(
-            invert_binary_tree(btree![1, 2, 3, 4]),
-            btree![1, 3, 2, null, null, null, 4]
-        );
-    }
+test! {
+    test_1: invert_binary_tree(btree![4, 2, 7, 1, 3, 6, 9]), btree![4, 7, 2, 9, 6, 3, 1],
+    test_2: invert_binary_tree(btree![1, 2, 3, 4]), btree![1, 3, 2, null, null, null, 4],
 }
