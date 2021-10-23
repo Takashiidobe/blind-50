@@ -1,22 +1,4 @@
-use crate::TreeNode;
-use std::cell::RefCell;
-use std::rc::Rc;
-
-#[cfg(test)]
-mod test {
-    use super::*;
-    use crate::btree;
-
-    #[test]
-    fn test_1() {
-        assert_eq!(is_valid_bst(btree![2, 1, 3]), true);
-    }
-
-    #[test]
-    fn test_2() {
-        assert_eq!(is_valid_bst(btree![5, 1, 3]), false);
-    }
-}
+use crate::*;
 
 type MaybeNode = Option<Rc<RefCell<TreeNode>>>;
 
@@ -37,4 +19,9 @@ pub fn is_valid_bst(root: MaybeNode) -> bool {
         }
     }
     helper(&root, i64::MIN, i64::MAX)
+}
+
+test! {
+    test_1: is_valid_bst(btree![2, 1, 3]), true,
+    test_2: is_valid_bst(btree![5, 1, 3]), false,
 }

@@ -1,23 +1,12 @@
-#[cfg(test)]
-mod test {
-    use super::*;
-    #[test]
-    fn test_1() {
-        assert_eq!(valid_anagram("tas", "sat"), true);
-    }
-
-    #[test]
-    fn test_2() {
-        assert_eq!(valid_anagram("rat", "cat"), false);
-    }
-
-    #[test]
-    fn test_3() {
-        assert_eq!(valid_anagram("anagram", "nagaram"), true);
-    }
-}
-
+use crate::*;
 use std::collections::HashMap;
+
+test! {
+    test_1: valid_anagram("tas", "sat"), true,
+    test_2: valid_anagram("rat", "sat"), false,
+    test_3: valid_anagram("", ""), true,
+    test_4: valid_anagram("anagram", "nagaram"), true,
+}
 
 pub fn valid_anagram(s: &str, t: &str) -> bool {
     let mut s_map = HashMap::new();
